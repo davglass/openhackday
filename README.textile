@@ -1,5 +1,12 @@
 h1. London Open Hack Day
 
-I will be keeping my examples and slides from the London Open Hackday here.
+I will be keeping my examples and slides from the London Open Hack Day here.
 
 http://openhacklondon.pbworks.com/
+
+
+    YUI.use('lighter', function(Y) {
+        Y.all('.faster li').each(function(v) {
+            v.set('innerHTML', 'easier');
+        });
+    });
