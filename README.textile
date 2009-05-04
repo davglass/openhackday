@@ -4,9 +4,10 @@ I will be keeping my examples and slides from the London Open Hack Day here.
 
 http://openhacklondon.pbworks.com/
 
-
+<pre class="console">
     YUI.use('lighter', function(Y) {
         Y.all('.faster li').each(function(v) {
             v.set('innerHTML', 'easier');
         });
     });
+</pre>
