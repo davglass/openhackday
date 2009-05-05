@@ -1,6 +1,6 @@
 YUI({
     //base: 'http://github.com/yui/yui3/raw/master/build/',
-    base: '../../../3.x/build/',
+    base: '../../../yui3/build/',
     combo: false
 }).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
     //Get a reference to the wrapper to use later and add a loading class to it.
