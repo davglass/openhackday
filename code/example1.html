@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Example</title>
+    <style type="text/css" media="screen">
+        p, h2 {
+            margin: 1em;
+        }
+	</style>
+</head>
+<body>
+<div id="doc3" class="yui-t7">
+    <div id="hd"><h1 id="header">Example</h1></div>
+    <div id="bd">
+        Here
+    </div>
+    <div id="ft">&nbsp;</div>
+</div>
+<!--script src="http://github.com/yui/yui3/raw/master/build/yui/yui-min.js"></script-->
+<script src="../../3.x/build/yui/yui-min.js"></script>
+<script>
+    YUI({
+        //base: 'http://github.com/yui/yui3/raw/master/build/',
+        base: '../../3.x/build/',
+        combo: false
+    }).use('node', function(Y) {
+        Y.on('delegate', function(e) {
+            console.log(e.target);
+            //alert('Clicked: ' + e.target.get('innerHTML'));
+        }, document, 'click', '*');
+        /*
+        Y.get('#bd').set('style.backgroundColor', 'red').appendChild(Y.Node.create('<p>Foo Bar</p>'));
+        Y.get('#bd').appendChild(Y.Node.create('<ul><li>item 1</li><li>item 2</li></ul>'));
+        Y.on('delegate', function(e) {
+            alert('Clicked: ' + e.target.get('innerHTML'));
+        }, '#bd ul', 'click', 'li');
+        console.log(Y.get('#bd ul'));
+        Y.get('#bd ul').appendChild(Y.Node.create('<li>item 3</li><li>item 4</li>'));
+        */
+    });
+</script>
+</body>
+</html>
