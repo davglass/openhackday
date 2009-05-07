@@ -92,6 +92,9 @@ YUI({
             wrapper.queryAll('li.' + c).removeClass('hidden');
         }
     }, document, 'click', '#photoList li');
+    Y.DD.DDM.on('drag:mouseDown', function(e) {
+        e.target.get('node').queryAll('img').addClass('selected');
+    });
     //On drag start, get all the selected elements
     //Add the count to the proxy element and offset it to the cursor.
     Y.DD.DDM.on('drag:start', function(e) {
