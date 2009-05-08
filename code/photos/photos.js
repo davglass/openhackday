@@ -1,15 +1,12 @@
 YUI({
     //base: 'http://github.com/yui/yui3/raw/master/build/',
-    /*
     base: '../../../yui3/build/',
     combo: false,
     filter: {
         'searchExp': "-min\\.js", 
         'replaceStr': "-min.js?stamp=" + (new Date()).getTime()
     }
-    */
-    //base: 'http:/'+'/yui.yahooapis.com/3.0.0b1m2/build/',
-    combo: true
+    //combo: true
 }).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
     //Get a reference to the wrapper to use later and add a loading class to it.
     var wrapper = Y.get('#yui-main .yui-g ul').addClass('loading');
@@ -143,7 +140,7 @@ YUI({
                     width: node.get('offsetWidth'),
                     height: node.get('offsetHeight')
                 },
-                duration: 1.5
+                duration: .5
             }).run();
         });
         var count = wrapper.queryAll('li.' + e.drop.get('node').get('id')).size();
