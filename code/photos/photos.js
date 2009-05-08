@@ -1,11 +1,15 @@
 YUI({
     //base: 'http://github.com/yui/yui3/raw/master/build/',
+    /*
     base: '../../../yui3/build/',
     combo: false,
     filter: {
         'searchExp': "-min\\.js", 
         'replaceStr': "-min.js?stamp=" + (new Date()).getTime()
     }
+    */
+    //base: 'http:/'+'/yui.yahooapis.com/3.0.0b1m2/build/',
+    combo: true
 }).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
     //Get a reference to the wrapper to use later and add a loading class to it.
     var wrapper = Y.get('#yui-main .yui-g ul').addClass('loading');
@@ -56,7 +60,7 @@ YUI({
             //Create and render the slider
             var sl = new Y.Slider({
                 railSize: '200px', value: 40, max: 70, min: 5,
-                thumbImage: Y.config.base+'/slider/assets/skins/sam/thumb-classic-x.png'
+                thumbImage: 'css/thumb-classic-x.png'
             }).render('.horiz_slider');
             //Listen for the change
             sl.after('valueChange',function (e) {
