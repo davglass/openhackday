@@ -1,12 +1,5 @@
 YUI({
-    //base: 'http://github.com/yui/yui3/raw/master/build/',
-    base: '../../../yui3/build/',
-    combo: false,
-    filter: {
-        'searchExp': "-min\\.js", 
-        'replaceStr': "-min.js?stamp=" + (new Date()).getTime()
-    }
-    //combo: true
+    combo: true
 }).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
     //Get a reference to the wrapper to use later and add a loading class to it.
     var wrapper = Y.get('#yui-main .yui-g ul').addClass('loading');
@@ -22,19 +15,19 @@ YUI({
                 //Create our URL
                 var url = 'http:/'+'/static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_m.jpg',
                     //Create the image and the LI
-                    img = Y.Node.create('<li class="loading"><img src="' + url + '"></li>'),
+                    li = Y.Node.create('<li class="loading"><img src="' + url + '"></li>'),
                     //Get the image from the LI
-                    fc = img.get('firstChild');
+                    img = li.get('firstChild');
                 //Append the li to the wrapper
-                wrapper.appendChild(img);
+                wrapper.appendChild(li);
                 //This little hack moves the tall images to the bottom of the list
                 //So they float better ;)
-                fc.on('load', function() {
+                img.on('load', function() {
                     //Is the height longer than the width?
                     var c = ((this.get('height') > this.get('width')) ? 'tall' : 'wide');
                     this.addClass(c);
                     if (c === 'tall') {
-                        //Love it to the end of the list.
+                        //Move it to the end of the list.
                         this.get('parentNode.parentNode').removeChild(this.get('parentNode'));
                         wrapper.appendChild(this.get('parentNode'));
                     }
