@@ -1,12 +1,17 @@
 YUI({
     //base: 'http://github.com/yui/yui3/raw/master/build/',
     base: '../../../yui3/build/',
-    combo: false
+    combo: false,
+    filter: {
+        'searchExp': "-min\\.js", 
+        'replaceStr': "-min.js?stamp=" + (new Date()).getTime()
+    }
 }).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
     //Get a reference to the wrapper to use later and add a loading class to it.
     var wrapper = Y.get('#yui-main .yui-g ul').addClass('loading');
     //Set it's height to the height of the viewport so we can scroll it.
     wrapper.setStyle('height', (wrapper.get('winHeight') - 50 )+ 'px');
+    Y.on('windowresize', function() { wrapper.setStyle('height', (wrapper.get('winHeight') - 50 )+ 'px'); });
     //Make the YQL query.
     new Y.yql('select * from flickr.photos.search(50) where user_id = "94309252@N00"', function(e) {
         if (e.query) {
@@ -50,7 +55,7 @@ YUI({
             });
             //Create and render the slider
             var sl = new Y.Slider({
-                railSize: '200px', value: 20, max: 70, min: 5,
+                railSize: '200px', value: 40, max: 70, min: 5,
                 thumbImage: Y.config.base+'/slider/assets/skins/sam/thumb-classic-x.png'
             }).render('.horiz_slider');
             //Listen for the change
@@ -58,13 +63,14 @@ YUI({
                 //Insert a dynamic stylesheet rule:
                 var sheet = new Y.StyleSheet('image_slider');
                 sheet.set('#yui-main .yui-g ul li', {
-                    width: e.newVal + '%'
+                    width: (e.newVal / 2) + '%'
                 });
             });
             //Remove the DDM as a bubble target..
             sl._dd.removeTarget(Y.DD.DDM);
             //Remove the wrappers loading class
             wrapper.removeClass('loading');
+            Y.get('#ft').removeClass('loading');
         }
     });
     //Listen for all mouseup's on the document (selecting/deselecting images)
@@ -92,6 +98,14 @@ YUI({
             wrapper.queryAll('li.' + c).removeClass('hidden');
         }
     }, document, 'click', '#photoList li');
+    //Stop the drag with the escape key
+    Y.get(document).on('keypress', function(e) {
+        if ((e.keyCode === 27) || (e.charCode === 27)) {
+            if (Y.DD.DDM.activeDrag) {
+                Y.DD.DDM.activeDrag.stopDrag();
+            }
+        }
+    });
     Y.DD.DDM.on('drag:mouseDown', function(e) {
         e.target.get('node').queryAll('img').addClass('selected');
     });

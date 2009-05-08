@@ -101,4 +101,7 @@
     display: none;
 }
 
+#ft.loading em, #ft.loading strong {
+    display: none;
+}
 
